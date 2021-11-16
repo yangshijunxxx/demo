@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex两列布局</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .parent{
+            display: flex;
+            flex-direction: row;
+        }
+        .left{
+            width: 100px;
+            height: 900px;
+            background-color: #F77F00;
+        }
+        .right{
+            margin-left: 20px;
+            width: 100%;
+            height: 900px;
+            background-color: #FCBF49;
+            /* 保证 左侧不会变化 */
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+</body>
+</html>

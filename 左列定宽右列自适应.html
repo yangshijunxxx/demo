@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>左列定宽右列自适应</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #left{
+            clear: both;
+            position: relative;
+            float: left;
+            width: 100px;
+            height: 900px;
+            background-color: #003049;
+        }
+        #right{
+            /* 这里不能加 float: right;  会脱离当前文档流*/
+            height: 900px;
+            width: 100%;
+            background-color: #D62828;
+        }
+    </style>
+</head>
+<body>
+    <div id="parent">
+        <div id="left"></div>
+        <div id="right"></div>
+    </div>
+</body>
+</html>
