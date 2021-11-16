@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFC</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .div1{
+            width: 100%;
+            height: 300px;
+            display: flex;
+            flex-direction: row;
+            text-align: center;
+        }
+        #div11{
+            width: 50%;
+            background-color: pink 
+        }
+        #div111{
+            width: 200px;
+            height: 40px;
+            background-color: rosybrown;
+        }
+        #div112{
+            width: 150px;
+            height: 70px;
+            background-color: #eee;
+            float: left;
+        }
+        #div113{
+            width: 200px;
+            height: 60px;
+            background-color: blue;
+        }
+        #div114{
+            width: 200px;
+            height: 70px;
+            background-color: brown;
+        }
+        #div12{
+            width: 50%;
+            background-color: plum;
+            /* 解决外部塌陷 */
+            overflow: hidden;
+        }
+        #div121{
+            width: 200px;
+            height: 40px;
+            background-color: rosybrown;
+        }
+        #div122{
+            width: 150px;
+            height: 70px;
+            background-color: #eee;
+            float: left;
+        }
+        #div123{
+            width: 200px;
+            height: 60px;
+            background-color: blue;
+            /* 这里清除受float影响的第一个 元素 clear：both 即可清除内部和外部的 塌陷问题
+            有时候 可能需要触发 bfc 单独 清除float影响
+            */
+            clear: both;
+        }
+        #div124{
+            width: 200px;
+            height: 70px;
+            background-color: brown;
+        }
+        #div2{
+            display: flex;
+        }
+        #div21{
+            width: 50%;
+            height: auto;
+            background-color: yellowgreen;
+        }
+        #div22{
+            width: 50%;
+            height: auto;
+            background-color: turquoise;
+        }
+        #div211{
+            width: 200px;
+            height: 200px;
+            background-color: #F3FEB0;
+            margin: 10px;
+        }
+        #div212{
+            width: 200px;
+            height: 200px;
+            background-color: #A5AAA3;
+            margin: 10px;
+        }
+        #div221{
+            width: 200px;
+            height: 200px;
+            background-color: #F3FEB0;
+            margin: 10px;
+        }
+        #div222{
+            width: 200px;
+            height: 200px;
+            background-color: #A5AAA3;
+            margin: 10px;
+        }
+        #test{
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<!-- 
+     1什么是bfc  bfc 就是 block formatting context 会计格式化上下文
+     2有什么特点  w3c 解释bfc 它决定了元素如何对其内容进行定位，一级与其他元素的关系和相互作用，
+     当涉及到可视化布局时，bfc提供了一个环境，html在这个环境中按照一定规则进行布局
+     简单来说就是  bfc 提供了一个完全独立的空间 空间里的元素不会影响到外部
+
+    3 bfc的触发  均可触发 bfc
+            overflow: hidden;
+            display: inline-block;
+            position: absolute;
+            position: fixed;
+            display: table-cell;
+            display: flex;
+    4.bfc规则
+        bfc 是一个块级元素 块级元素就会一个接一个排列
+        bfc 是一个隔离的独立容器
+        垂直方向的距离由 margin 决定 属于同一个bfc 的相邻标签 外边距会发生重叠
+        计算bfc时 float也会计算在内
+    5.bfc有什么用
+        bfc 在使用 float时会脱离文档流 高度塌陷 bfc 解决塌陷问题
+        bfc 解决 边距重叠问题
+
+     -->
+</body>
+    <div class="div1">
+        <div id="div11">
+            <p>使用float存在塌陷</p>
+            <div id="div111">第一个</div>
+            <div id="div112">第二个</div>
+            <div id="div113">第三个</div>
+            <div id="div114">第四个</div>
+        </div>
+        <div id="div12">
+            <p>使用float解决塌陷</p>
+            <div id="div121">第一个</div>
+            <div id="div122">第二个</div>
+            <div id="div123">第三个</div>
+            <div id="div124">第四个</div>
+        </div>
+    </div>
+    <div id="div2">
+        <div id="div21">
+            <p>margin重叠</p>
+            <div id="div211"></div>
+            <div id="div212"></div>
+        </div>
+        <div id="div22">
+            <p>bfc消除重叠</p>
+            <div id="div221"></div>
+            <!-- 在bfc内部可以消除重叠 -->
+            <div id="test">
+                <div id="div222"></div>
+            </div>
+        </div>
+    </div>
+</html>
