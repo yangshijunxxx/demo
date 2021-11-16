@@ -6,9 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+/*      1. 对浮动的理解 可以划分为 为什么会出现浮动这种东西 浮动的出现是为了解决 文本 环绕图片的问题 解决了排版问题
+        浮动会破坏当前文档流 会挤压文本的空间
+        2.浮动会导致 塌陷
+        3.如何解决float对父级同级容器的影响
+        float对外部的影响 可以通过给父元素设置 overflow:hidden触发bfc解决 (触发bfc的方式有很多) 方法1
+        还可以通过 给父元素添加伪元素 然后 clear：both 即可 原理就是 在父元素末尾添加block元素 清除其浮动效果后 按照正常的块级容器排列
+        其后的父级同级容器也就会正常排列 那么父元素的同级元素也能正常排列了。所以这个子容器不能有高度和内容，不然会影响父元素的布局。
+        4.如何解决float对内部的影响
+        参照 上述方法 给受到float影响的 第一个 内部元素 清除浮动即可 比如 本例中的第四个 清除浮动
+       */
+       /* 方法1 */
         /* .fu{
             overflow: hidden;
         } */
+        /* 方法2 */
+        .fu::after{
+            display: block;
+            height: 0;
+            clear: both;
+            background-color: chartreuse;
+            /* content 设置空字符即可 */
+            content: "";
+        }
         #z1{
             width: 400px;
             height: 30px;
@@ -31,6 +51,7 @@
             width: 400px;
             height: 30px;
             background-color: black;
+            clear: both;
         }
         .fu2{
             width: 500px;
