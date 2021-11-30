@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css画图形</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    .main{
+        display: flex;
+        justify-content: space-between;
+        /*超出部分到下一行*/
+        flex-wrap: wrap;
+    }
+    .square{
+        width: 100px;
+        height: 100px;
+        background-color: #01CC01;
+    }
+    .circle{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #36CFEF;
+    }
+    .test{
+        width: 0;
+        height: 0;
+        border-left: 50px solid #FF66B5;
+        border-right: 50px solid #F0489F;
+        border-top: 50px solid #13A310;
+        border-bottom: 50px solid #4BF048;
+    }
+    .triangle_up{
+        width: 0;
+        height: 0;
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+        border-bottom: 100px solid #F4AF36;
+    }
+    .triangle_down{
+        width: 0;
+        height: 0;
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+        border-top: 100px solid #F4AF36;
+    }
+    .triangle_left{
+        width: 0;
+        height: 0;
+        border-top: 50px solid transparent;
+        border-right: 100px solid #E0CBC5;
+        border-bottom: 50px solid transparent;
+    }
+    .triangle_top_left{
+        width: 0;
+        height: 0;
+        border-left: 100px solid #C5E0D8;
+        /*border-right: 50px solid transparent;*/
+        border-bottom: 100px solid transparent;
+    }
+    .triangle_top_right{
+        width: 0;
+        height: 0;
+        border-right: 100px solid #D0CAE0;
+        border-bottom: 100px solid transparent;
+    }
+    .triangle_bottom_left{
+        width: 0;
+        height: 0;
+        border-left: 100px solid #E0DEC5;
+        border-bottom: 100px solid transparent;
+    }
+    .triangle_bottom_right{
+        width: 0;
+        height: 0;
+        border-right: 100px solid #03738C;
+        border-top: 100px solid transparent;
+    }
+    .trapezoid{
+        width: 40px;
+        height: 0;
+        border-left: 25px solid transparent;
+        border-right: 25px solid transparent;
+        border-bottom: 100px solid #F2B441;
+    }
+    .parallelogram{
+        width: 100px;
+        height: 100px;
+        background-color: #F26052;
+        transform: skew(20deg);
+    }
+    #heart {
+        position: relative;
+        width: 100px;
+        height: 90px;
+    }
+</style>
+<body>
+    <div class="main">
+        <div class="square"></div>
+        <div class="circle"></div>
+        <div class="test"></div>
+        <div class="triangle_up"></div>
+        <div class="triangle_down"></div>
+        <div class="triangle_left"></div>
+        <div class="triangle_top_left"></div>
+        <div class="triangle_top_right"></div>
+        <div class="triangle_bottom_left"></div>
+        <div class="triangle_bottom_right"></div>
+        <div class="trapezoid"></div>
+        <div class="parallelogram"></div>
+        <div class="heart"></div>
+    </div>
+</body>
+</html>
