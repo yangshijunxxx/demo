@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片悬停放大</title>
+    <style>
+        #img-wrapper{
+            display: flex;
+            justify-content: center;
+            width: 400px;
+            height: 400px;
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.6);
+        }
+        #img-wrapper img:hover{
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="img-wrapper">
+        <img src="./src/悬停放大.png" alt="图片未加载">
+    </div>
+</body>
+</html>
