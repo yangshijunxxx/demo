@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>暗黑模式</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .header{
+            width: 100%;
+            height: 280px;
+            background-color: #FFFFFF;
+            /*background-color: #8A6DF2;*/
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: 300ms;
+            min-width: 600px;
+        }
+        .header_dark{
+            filter: invert(1) hue-rotate(180deg);
+
+        }
+        .img_dark{
+            filter: invert(1) hue-rotate(180deg);
+        }
+        .header img{
+            width: 100px;
+            height: 100px;
+        }
+        .author{
+            font-size: 15px;
+            transform: translateX(28%);
+        }
+        .switch img{
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header" id="header">
+        <img src="./src/dark.png" alt="DarkMode" id="cover">
+        <h1 class="title">Dark Mode</h1>
+        <p class="author">Developed by 1_Bit</p>
+        <p class="switch" id="input"><img src="./src/sun.png" id="switch"></p>
+    </div>
+</body>
+<script>
+    var input = document.getElementById('input')
+    var header = document.getElementById('header')
+    var cover = document.getElementById('cover')
+    input.onclick = function (){
+        if (input.innerHTML === "<img src=\"./src/sun.png\" id=\"switch\">"){
+            input.innerHTML = "<img src=\"./src/moon.png\" id=\"switch\">"
+            header.classList.add('header_dark')
+            console.log(header.classList)
+            input.classList.add('img_dark')
+            //方便回看
+            cover.classList.add('img_dark')
+        }else {
+            console.log('test')
+            input.innerHTML = "<img src=\"./src/sun.png\" id=\"switch\">"
+            header.classList.remove('header_dark')
+            input.classList.remove('img_dark')
+            cover.classList.remove('img_dark')
+        }
+    }
+</script>
+</html>
