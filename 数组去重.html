@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组去重</title>
+</head>
+<body>
+
+</body>
+<script>
+    //Set 对象允许你存储任何类型的唯一值，无论是原始值或者是对象引用
+    let arr = [12,34,54,3,23,3,5,54,43]
+    var unique = function (arr) {
+        let res = new Set();
+        for (let i = 0; i < arr.length; i++) {
+            res.add(arr[i]);
+        }
+        return res;
+    }
+    // 使用对象中间判断
+    var unique1 = function (arr) {
+        let obj = {};
+        for (let i = 0; i < arr.length; i++) {
+            let current = arr[i];
+            if (obj[current]){
+                arr[i] = arr[length-1];
+                arr.length--;
+                i--;
+            }
+            obj[current] = current;
+        }
+        return obj;
+    }
+    //indexOf()方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
+    var unique2 = function (arr) {
+        let new_arr = [];
+        for (let i = 0; i <arr.length; i++) {
+            let current = arr[i]
+            if (new_arr.indexOf(current) === -1){
+                new_arr.push(current);
+            }
+        }
+        return new_arr;
+    }
+    //sort可以指定按某种顺序进行排列的函数。如果省略，元素按照转换为的字符串的各个字符的Unicode位点进行排序。
+    var unique3 = function (arr) {
+        let new_arr = [];
+        new_arr = arr.sort(function (a,b) {
+            return a-b;
+        })
+        for (let i = 0; i < new_arr.length; i++) {
+            if (arr[i] === new_arr[i+1]){
+                //从2开始删除一个
+                new_arr.splice(i,1)
+            }
+        }
+        return new_arr;
+    }
+    // includes() 方法用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回 true，否则返回 false。
+    var unique4 = function (arr) {
+        let new_arr = [];
+        for (let i = 0; i <arr.length; i++) {
+            let current = arr[i];
+            if (!new_arr.includes(current)){
+                new_arr.push(current);
+            }
+        }
+        return new_arr;
+    }
+    // splice
+    var unique5 = function (arr) {
+        for (let i = 0; i <arr.length; i++) {
+            for (let j = i+1; j < arr.length; j++) {
+                if (arr[i] === arr[j]){
+                    arr.splice(j,1);
+                }
+            }
+        }
+        return arr;
+    }
+    // filter  filter 遍历的元素范围在第一次调用 callback 之前就已经确定了。
+    // 在调用 filter 之后被添加到数组中的元素不会被 filter 遍历到。如果已经存在的元素被改变了，
+    // 则他们传入 callback 的值是 filter 遍历到它们那一刻的值。被删除或从来未被赋值的元素不会被遍历到
+    var unique6 = function (arr) {
+        let res = arr.filter(function (item,index,array) {
+            return array.indexOf(item) === index;
+        })
+        return res;
+    }
+    console.log(unique6(arr))
+</script>
+</html>
