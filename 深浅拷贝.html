@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>深浅拷贝</title>
+</head>
+<body>
+
+</body>
+<script>
+    let obj = {
+        name : '1Bit',
+        age : 18,
+        info : {
+            hobby : ['soccer','piano',{
+                a : 1,
+            }]
+        },
+        career : {
+            teacher : 4,
+            engineer : 9,
+        }
+    }
+    // let arr = [1,2,3,4,5,6]
+    let arr = [1,2,{test:3},4,5,6];
+    // let arr = [[1,2],3,4,5,6];
+    // Array 方法实现的浅拷贝
+    let obj1 = obj;
+    let arr2 = Array.from(arr);
+    let arr3 = arr.slice();
+    // 拓展运算符实现浅拷贝
+    let arr4 = [...arr];
+    // 可以通过json的方式把浅拷贝变成深拷贝,先把js对象变成json字符串，
+    // 然后通过JSON.parse()把json字符串变成新的js对象和之前的地址不一样
+    // json不仅可以操作数组的深拷贝，还可以实现对象的深拷贝
+    let arr5 = JSON.parse(JSON.stringify([...arr]));
+    obj.info.hobby[2].a = 12;
+    arr[2].test = 11;
+    console.log(obj);
+    console.log(obj.info.hobby[2].a);  //12
+    console.log(obj1.info.hobby[2].a);  //12
+    console.log('---------');
+    console.log(arr); //11, 2, 3, 4, 5, 6
+    // 这里看起来很像是深拷贝，其实不然 实际上还是浅拷贝比如将arr换成arr = [[1,2],3,4,5,6]
+    // 只能第一层或者说对于引用数据类型没有  比如  arr = [1,2,{test:3},4,5,6];
+    // from slice 展开运算符 和其他一些array方法都不能实现深拷贝，都是浅拷贝
+    console.log(arr2); //1, 2, 3, 4, 5, 6
+    console.log(arr3);  //1, 2, 3, 4, 5, 6
+    console.log(arr4);
+    console.log(arr5);
+
+//    手写深拷贝 ES5
+    function deepClone(origin,target) {
+        // target 如果不存在就给一个空对象，可以给定
+        var tar = target || {};
+        var arrayType = '[object Array]'
+        for (let key in origin) {
+            if (origin.hasOwnProperty(key)){
+                if (typeof origin[key] === 'object' && typeof origin[key] !== null){
+                    // 判断是数组还是对象
+                    tar[key] = Object.prototype.toString.call(origin[key]) === arrayType ? [] : {};
+                    deepClone(origin[key],tar[key]);
+                }
+                else {
+                    tar[key] = origin[key];
+                }
+            }
+        }
+        return tar;
+    }
+    let obj2 = deepClone(obj);
+    console.log('---------');
+    console.log(obj);
+    obj.info.hobby[2].a = 99;
+    console.log(obj2);
+//    手写深拷贝 ES6
+    function deep_clone(origin) {
+    //    undefined 和 null  双等可以同时判断null和undefined  还有 不是object
+        if (origin == undefined || typeof origin !== 'object'){
+            return origin;
+        }
+        // 判断是不是特殊的object 比如 Date RegExp
+        if (origin instanceof Date){
+            return new Date(origin);
+        }
+        if (origin instanceof RegExp){
+            return new RegExp(origin);
+        }
+        const target = new origin.constructor();
+        for (let targetKey in origin) {
+            if (origin.hasOwnProperty(targetKey)){
+                target[targetKey] = deep_clone(origin[targetKey]);
+            }
+        }
+        return target;
+    }
+    let obj3 = deep_clone(obj);
+    obj.info.hobby[2].a = 999;
+    console.log('-------')
+    console.log(obj);
+    console.log(obj3);
+</script>
+</html>
